@@ -5,6 +5,9 @@ const dotenv = require('dotenv').config();
 
 const port = process.env.PORT || 8000;
 
+// Import routes
+const authRoute = require('./routes/auth');
+
 // Connect to DB
 mongoose.connect(
     process.env.DB_CONNECT,
@@ -17,8 +20,8 @@ mongoose.connect(
     }
 );
 
-// Import routes
-const authRoute = require('./routes/auth');
+// Middleware
+app.use(express.json());
 
 // Routes middleware
 app.use('/api/user', authRoute);
